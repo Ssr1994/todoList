@@ -1,0 +1,62 @@
+li {
+    word-break: break-all;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+md-list {
+    padding: 0 !important;
+}
+
+.hint {
+    /* Position the hint */
+    position: absolute;
+    left: 2px;
+    right: auto;
+    bottom: 7px;
+    /* Copy styles from ng-messages */
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    /* Set our own color */
+    color: grey;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.todo-list-container {
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.todo-checkbox-div md-checkbox {
+    margin: 0;
+}
+
+.todo-completed {
+    text-decoration: line-through;
+    color: #BDBDBD;
+}
+
+.animation.ng-move,
+.animation.ng-enter,
+.animation.ng-leave {
+  transition: all linear 0.6s;
+}
+
+.animation.ng-enter,
+.animation.ng-move,
+.animation.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.animation.ng-leave,
+.animation.ng-move.ng-move-active,
+.animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
