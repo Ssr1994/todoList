@@ -13,7 +13,8 @@
       <div flex flex-gt-xs="33" flex-offset-gt-xs="33" flex-xs="80" flex-offset-xs="10">
         <h1 class="text-center">To-Do List</h1>
           
-        <md-datepicker ng-model="date"></md-datepicker>
+        <md-datepicker ng-model="date" ng-change="onDateChange('{{date.toDateString()}}')"
+            md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
           
         <form id="todo-form" ng-submit="addItem()">
           <md-input-container class="md-block" ng-cloak>
@@ -27,7 +28,7 @@
           <md-list ng-cloak>
             <md-list-item class="md-1-line animation" ng-repeat="item in todoItems">
               <div class="todo-checkbox-div" ng-repeat="v in [0]">
-                <md-checkbox class="md-primary" ng-model="item.completed" ng-change="toggleCompleted(item)"></md-checkbox>
+                <md-checkbox class="md-primary" ng-model="item.completed" ng-change=""></md-checkbox>
               </div>
               <div class="md-list-item-text" ng-class="{'todo-completed': item.completed}">{{item.todo}}</div>
               <md-button class="md-secondary" ng-click="removeItem(item)">X</md-button>
@@ -44,6 +45,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
     <!-- my app -->
-    <script src="todolist.js"></script>
+    <script src="todo.js"></script>
+    <script src="todo-controller.js"></script>
   </body>
 </html>
