@@ -13,23 +13,36 @@
         $scope.todoItems = [];
         for (var d = new Date(), i = 0; i <= 7; i++) {
             d.setDate($scope.date.getDate() - i);
-            var todos = JSON.parse(localStorage.getItem(d.toDateString())) || [];
-            $scope.todoItems = $scope.todoItems.concat(todos);
+            var todos = JSON.parse(localStorage.getItem(d.toDateString()));
+            if (todos && todos.constructor == Array)
+                $scope.todoItems = todos.concat($scope.todoItems);
+        }
+        
+        $scope.storeTodos = function(date) {
+            if (date instanceof Date)
+                date = date.toDateString();
+            if ($scope.todoItems.length > 0)
+                localStorage.setItem(date, JSON.stringify($scope.todoItems));
+            else
+                localStorage.removeItem(date);
         }
         
         $scope.addItem = function() {
             $scope.todoItems.push({todo: $scope.todoInput, completed: false});
+            $scope.storeTodos($scope.date);
             $scope.todoInput = "";
         }
         
         $scope.removeItem = function(item) {
             var index = $scope.todoItems.indexOf(item);
-            if (index >= 0)
+            if (index >= 0) {
                 $scope.todoItems.splice(index, 1);
+                $scope.storeTodos($scope.date);
+            }
         }
         
         $scope.onDateChange = function(oldDate) {
-            localStorage.setItem(oldDate, JSON.stringify($scope.todoItems));
+            $scope.storeTodos(oldDate);
             $scope.todoItems = JSON.parse(localStorage.getItem($scope.date.toDateString())) || [];
         }
     }]);

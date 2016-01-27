@@ -3,32 +3,46 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>To-Do List</title>
+    <title>ToDos</title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
 
   <body ng-app="todoList">
-    <div layout="row" ng-controller="mainController">
-      <div flex flex-gt-xs="33" flex-offset-gt-xs="33" flex-xs="80" flex-offset-xs="10">
-        <h1 class="text-center">To-Do List</h1>
-          
-        <md-datepicker ng-model="date" ng-change="onDateChange('{{date.toDateString()}}')"
+    <div layout="row" ng-controller="testController" ng-cloak>
+        <md-toolbar class="md-warn text-center" ng-if="showWarning" ng-click="hideWarning()">
+            <span flex></span>
+            <span>You browser cannot store you to-do list on your computer!</span>
+            <span flex></span>
+        </md-toolbar>
+    </div>
+    
+    <div layout="row" ng-controller="mainController" ng-cloak>
+      <div flex flex-gt-sm="40" flex-offset-gt-sm="30" flex-sm="60" flex-offset-sm="20" flex-xs="80" flex-offset-xs="10">
+        
+        <h1 class="title text-center">To-Dos</h1>
+        
+        <md-whiteframe class="md-whiteframe-8dp layout-column">
+        
+        <div class="calendar-container" layout="row" layout-align="center">        
+            <md-datepicker ng-model="date" ng-change="onDateChange('{{date.toDateString()}}')"
             md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-          
+        </div>
+        
         <form id="todo-form" ng-submit="addItem()">
-          <md-input-container class="md-block" ng-cloak>
+          <md-input-container class="md-block">
             <label>What to do</label>
             <input ng-model="todoInput">
             <div class="hint">Type in your to-do and hit enter!</div>
           </md-input-container>
         </form>
+        
           
         <div class="todo-list-container" ng-show="todoItems.length > 0">
-          <md-list ng-cloak>
+          <md-list>
             <md-list-item class="md-1-line animation" ng-repeat="item in todoItems">
               <div class="todo-checkbox-div" ng-repeat="v in [0]">
-                <md-checkbox class="md-primary" ng-model="item.completed" ng-change=""></md-checkbox>
+                <md-checkbox class="md-primary" ng-model="item.completed" aria-label="todo"></md-checkbox>
               </div>
               <div class="md-list-item-text" ng-class="{'todo-completed': item.completed}">{{item.todo}}</div>
               <md-button class="md-secondary" ng-click="removeItem(item)">X</md-button>
@@ -36,16 +50,20 @@
             </md-list-item>
           </md-list>
         </div>
+        
+        </md-whiteframe>
+        
       </div>
     </div>
     <!-- AngularJS -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script src="angularjs/angular.min.js"></script>
+    <script src="angularjs/angular-animate.min.js"></script>
+    <script src="angularjs/angular-aria.min.js"></script>
+    <script src="angularjs/angular-messages.min.js"></script>
+    <script src="angularjs/angular-material.min.js"></script>
     <!-- my app -->
     <script src="todo.js"></script>
+    <script src="test-controller.js"></script>
     <script src="todo-controller.js"></script>
   </body>
 </html>

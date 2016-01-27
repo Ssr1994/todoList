@@ -10,6 +10,10 @@ md-list {
     padding: 0 !important;
 }
 
+md-whiteframe {
+    border-radius: 4px;
+}
+
 .hint {
     /* Position the hint */
     position: absolute;
@@ -28,10 +32,25 @@ md-list {
     text-align: center;
 }
 
+.title {
+    margin: 10% 0 6% 0;
+    color: rgba(0, 0, 0, 0.3);
+    text-shadow: 0px 2.5px 1.5px rgba(0, 0, 0, 0.3);
+}
+
+.calendar-container {
+    margin-top: 8px;
+}
+
+#todo-form {
+    margin: 0px 5%;
+}
+
 .todo-list-container {
     border: 1px solid #E1E1E1;
     border-radius: 4px;
     padding: 0;
+    margin: 4px 5% 18px 5%;
 }
 
 .todo-checkbox-div md-checkbox {
