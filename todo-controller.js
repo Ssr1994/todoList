@@ -1,5 +1,8 @@
 (function() {
-    angular.module('todoList').controller('mainController', ['$scope', function($scope) {
+    angular.module('todoList')
+        .controller('todoController', ['$scope', '$mdDialog', todoController]);
+    
+    function todoController($scope, $mdDialog) {
         $scope.date = new Date();
         $scope.minDate = new Date(
             $scope.date.getFullYear(),
@@ -25,13 +28,13 @@
                 localStorage.setItem(date, JSON.stringify($scope.todoItems));
             else
                 localStorage.removeItem(date);
-        }
+        };
         
         $scope.addItem = function() {
             $scope.todoItems.push({todo: $scope.todoInput, completed: false});
             $scope.storeTodos($scope.date);
             $scope.todoInput = "";
-        }
+        };
         
         $scope.removeItem = function(item) {
             var index = $scope.todoItems.indexOf(item);
@@ -39,11 +42,27 @@
                 $scope.todoItems.splice(index, 1);
                 $scope.storeTodos($scope.date);
             }
-        }
+        };
+        
+        $scope.showHelp = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'help.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        };
         
         $scope.onDateChange = function(oldDate) {
             $scope.storeTodos(oldDate);
             $scope.todoItems = JSON.parse(localStorage.getItem($scope.date.toDateString())) || [];
         }
-    }]);
+        
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+        }
+    }
 })();

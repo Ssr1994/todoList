@@ -17,13 +17,18 @@
       </md-toolbar>
     </div>
     
-    <div layout="row" ng-controller="mainController" ng-cloak>
+    <div layout="row" ng-controller="todoController" ng-cloak>
       <div flex flex-gt-sm="40" flex-offset-gt-sm="30" flex-sm="60" flex-offset-sm="20" flex-xs="80" flex-offset-xs="10">
         <h1 class="title text-center">To-Dos</h1>
         <md-whiteframe class="md-whiteframe-8dp layout-column">
-          <div class="calendar-container" layout="row" layout-align="center">        
-            <md-datepicker ng-model="date" ng-change="onDateChange('{{date.toDateString()}}')"
-            md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+          <div class="calendar-container" layout="row">
+            <div flex layout="row" layout-align="center">
+              <md-datepicker ng-model="date" ng-change="onDateChange('{{date.toDateString()}}')"
+              md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+            </div>
+            <md-button class="md-icon-button" ng-click="showHelp($event)" aria-label="help">
+              <md-icon md-svg-src="angularjs/help.svg"></md-icon>
+            </md-button>
           </div>
 
           <form id="todo-form" ng-submit="addItem()">
