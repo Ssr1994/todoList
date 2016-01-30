@@ -17,8 +17,10 @@
         for (var d = new Date(), i = 0; i <= 7; i++) {
             d.setDate($scope.date.getDate() - i);
             var todos = JSON.parse(localStorage.getItem(d.toDateString()));
-            if (todos && todos.constructor == Array)
+            if (todos && todos.constructor == Array) {
                 $scope.todoItems = todos.concat($scope.todoItems);
+                localStorage.removeItem(d.toDateString());
+            }
         }
         
         $scope.storeTodos = function(date) {
@@ -29,6 +31,8 @@
             else
                 localStorage.removeItem(date);
         };
+        
+        $scope.storeTodos($scope.date);
         
         $scope.addItem = function() {
             $scope.todoItems.push({todo: $scope.todoInput, completed: false});
