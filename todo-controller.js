@@ -2,7 +2,7 @@
     angular.module('todoList')
         .controller('todoController', ['$scope', '$mdDialog', todoController]);
     
-    function todoController($scope, $mdDialog) {
+    function todoController($scope, $mdDialog, todoModel) {
         $scope.date = new Date();
         $scope.minDate = new Date(
             $scope.date.getFullYear(),
@@ -14,13 +14,14 @@
             $scope.date.getDate() + 14);
         $scope.todoInput = "";
         $scope.todoItems = [];
+        $scope.editingItem = null;
         for (var d = new Date(), i = 0; i <= 7; i++) {
-            d.setDate($scope.date.getDate() - i);
             var todos = JSON.parse(localStorage.getItem(d.toDateString()));
             if (todos && todos.constructor == Array) {
                 $scope.todoItems = todos.concat($scope.todoItems);
                 localStorage.removeItem(d.toDateString());
             }
+            d.setDate(-1);
         }
         
         $scope.storeTodos = function(date) {
@@ -35,9 +36,11 @@
         $scope.storeTodos($scope.date);
         
         $scope.addItem = function() {
-            $scope.todoItems.push({todo: $scope.todoInput, completed: false});
+            if (!$scope.todoInput) return;
+            $scope.todoItems.push({todo: $scope.todoInput, completed: $scope.editingItemState || false});
             $scope.storeTodos($scope.date);
             $scope.todoInput = "";
+            $scope.editingItemState = null;
         };
         
         $scope.removeItem = function(item) {
@@ -47,6 +50,12 @@
                 $scope.storeTodos($scope.date);
             }
         };
+        
+        $scope.editItem = function(item) {
+            $scope.todoInput = item.todo;
+            $scope.editingItemState = item.completed;
+            $scope.removeItem(item);
+        }
         
         $scope.showHelp = function(ev) {
             $mdDialog.show({

@@ -45,7 +45,7 @@
               <div class="todo-checkbox-div" ng-repeat="v in [0]">
                 <md-checkbox class="md-primary" ng-model="item.completed" aria-label="todo" ng-change="storeTodos(date)"></md-checkbox>
               </div>
-              <div class="md-list-item-text" ng-class="{'todo-completed': item.completed}">{{item.todo}}</div>
+              <div class="md-list-item-text" ng-class="{'todo-completed': item.completed}" ng-dblclick="editItem(item)">{{item.todo}}</div>
               <md-button class="md-secondary" ng-click="removeItem(item)">X</md-button>
               <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
